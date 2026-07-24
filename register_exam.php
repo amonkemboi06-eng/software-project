@@ -5,9 +5,24 @@ session_start();
 include "db.php";
 
 
-// Get examinations
+// Protect student page
 
-$query = "SELECT * FROM examinations ORDER BY exam_date ASC";
+if (!isset($_SESSION['user']) || $_SESSION['role'] != "student") {
+
+    header("Location: login.php");
+    exit();
+
+}
+
+
+
+// Get available examinations
+
+$query = "
+SELECT * 
+FROM examinations
+ORDER BY exam_date ASC
+";
 
 $result = $conn->query($query);
 
@@ -24,7 +39,7 @@ $result = $conn->query($query);
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Examinations | OERS</title>
+<title>Register Exam | OERS</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -42,12 +57,10 @@ $result = $conn->query($query);
 <?php include "menu.php"; ?>
 
 
-
 <div class="container">
 
 
 <div class="login-box" style="width:90%;">
-
 
 
 <h2 style="text-align:center;">
@@ -56,30 +69,10 @@ Available Examinations
 
 
 
-<?php if(isset($_SESSION['role']) && $_SESSION['role']=="admin"){ ?>
-
-<p style="text-align:center;">
-
-<a href="add_exam.php">
-
-<button>
-Add Examination
-</button>
-
-</a>
-
-</p>
-
-<?php } ?>
-
-
-
 <table border="1" width="100%" cellpadding="10">
 
 
 <tr>
-
-<th>ID</th>
 
 <th>Unit Code</th>
 
@@ -91,6 +84,8 @@ Add Examination
 
 <th>Venue</th>
 
+<th>Action</th>
+
 </tr>
 
 
@@ -99,10 +94,6 @@ Add Examination
 
 
 <tr>
-
-<td>
-<?php echo $exam['id']; ?>
-</td>
 
 
 <td>
@@ -130,6 +121,26 @@ Add Examination
 </td>
 
 
+<td>
+
+<form action="save_exam_registration.php" method="POST">
+
+<input 
+type="hidden"
+name="examination_id"
+value="<?php echo $exam['id']; ?>">
+
+
+<button type="submit">
+Register
+</button>
+
+
+</form>
+
+</td>
+
+
 </tr>
 
 
@@ -137,7 +148,6 @@ Add Examination
 
 
 </table>
-
 
 
 </div>

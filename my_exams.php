@@ -5,11 +5,55 @@ session_start();
 include "db.php";
 
 
-// Get examinations
+// Protect student page
 
-$query = "SELECT * FROM examinations ORDER BY exam_date ASC";
+if (!isset($_SESSION['user']) || $_SESSION['role'] != "student") {
 
-$result = $conn->query($query);
+    header("Location: login.php");
+    exit();
+
+}
+
+
+$student_id = $_SESSION['student_id'];
+
+
+// Get student's registered exams
+
+$stmt = $conn->prepare(
+"
+SELECT 
+examinations.unit_code,
+examinations.unit_name,
+examinations.exam_date,
+examinations.exam_time,
+examinations.venue,
+exam_registrations.status
+
+FROM exam_registrations
+
+INNER JOIN examinations
+
+ON exam_registrations.examination_id = examinations.id
+
+WHERE exam_registrations.student_id = ?
+
+ORDER BY examinations.exam_date ASC
+
+"
+);
+
+
+$stmt->bind_param(
+    "i",
+    $student_id
+);
+
+
+$stmt->execute();
+
+
+$result = $stmt->get_result();
 
 
 ?>
@@ -24,7 +68,7 @@ $result = $conn->query($query);
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Examinations | OERS</title>
+<title>My Exams | OERS</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -42,35 +86,15 @@ $result = $conn->query($query);
 <?php include "menu.php"; ?>
 
 
-
 <div class="container">
 
 
 <div class="login-box" style="width:90%;">
 
 
-
 <h2 style="text-align:center;">
-Available Examinations
+My Registered Exams
 </h2>
-
-
-
-<?php if(isset($_SESSION['role']) && $_SESSION['role']=="admin"){ ?>
-
-<p style="text-align:center;">
-
-<a href="add_exam.php">
-
-<button>
-Add Examination
-</button>
-
-</a>
-
-</p>
-
-<?php } ?>
 
 
 
@@ -78,8 +102,6 @@ Add Examination
 
 
 <tr>
-
-<th>ID</th>
 
 <th>Unit Code</th>
 
@@ -91,6 +113,8 @@ Add Examination
 
 <th>Venue</th>
 
+<th>Status</th>
+
 </tr>
 
 
@@ -99,10 +123,6 @@ Add Examination
 
 
 <tr>
-
-<td>
-<?php echo $exam['id']; ?>
-</td>
 
 
 <td>
@@ -130,6 +150,11 @@ Add Examination
 </td>
 
 
+<td>
+<?php echo $exam['status']; ?>
+</td>
+
+
 </tr>
 
 
@@ -137,7 +162,6 @@ Add Examination
 
 
 </table>
-
 
 
 </div>

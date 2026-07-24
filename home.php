@@ -1,172 +1,85 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Exam Registration System</title>
+    <title>Online Examination Registration System</title>
 
-  <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <video autoplay muted loop id="bg-video">
     <source src="VID1.mp4" type="video/mp4">
 </video>
-    <!-- Navigation -->
 
-    <header>
+<?php include "menu.php"; ?>
 
-        <nav class="navbar">
+<section class="hero">
 
-            <div class="Earth">
+    <h1>Online Examination Registration </h1>
 
+    <p>
+        Register for examinations anytime, anywhere with a secure and easy-to-use online platform.
+    </p>
 
-              OERS 
+    <div class="hero-buttons">
 
+        <a href="register.php">
+            <button>Get Started</button>
+        </a>
 
-            </div>
+        <a href="login.php">
+            <button>Login</button>
+        </a>
 
-            <ul class="nav-links">
-                <li><a href="examinations.php">Examinations</a></li>
-                <li><a href="register.php">Register</a></li>
-                <li><a href="login.php">Login</a></li>
-                <li><a href="admin.php">Admin</a></li>
-                <li><a href="#">Contact</a></li>
+    </div>
 
-            </ul>
-
-        </nav>
-
-    </header>
+</section>
 
 
-    <!-- Hero -->
-
-    <section class="hero">
-
-        <h1>Online Exam Registration System</h1>
-
-        <p>
-            Register for your examinations quickly and securely.
-        </p>
-
-        <button id="registerBtn">
-            Register Now
-        </button>
-
-    </section>
 
 
-    <!-- Features -->
+<section class="steps">
 
-    <section class="features">
+    <h2>How It Works</h2>
 
-        <h2>System Features</h2>
+    <ol>
 
-        <div class="cards">
+        <li>Create your student account.</li>
 
-            <div class="card">
-                <h3>Student Registration</h3>
-                <p>Create your account online.</p>
-            </div>
+        <li>Login to your account.</li>
 
-            <div class="card">
-                <h3>Exam Registration</h3>
-                <p>Select available exams.</p>
-            </div>
+        <li>Select available examinations.</li>
 
-            <div class="card">
-                <h3>Exam Timetable</h3>
-                <p>View examination schedules.</p>
-            </div>
+        <li>Submit your registration.</li>
 
-            <div class="card">
-                <h3>Registration Status</h3>
-                <p>Track your registration.</p>
-            </div>
+        <li>Print your examination slip.</li>
 
-        </div>
+    </ol>
 
-    </section>
+</section>
+
+<section class="about">
 
 
-    <!-- Available Exams -->
 
-    <section class="exam-section">
+</section>
 
-        <h2>Available Examinations</h2>
+<footer>
 
-        <table>
+    <p>
 
-            <tr>
-                <th>Course</th>
-                <th>Date</th>
-                <th>Venue</th>
-            </tr>
+        &copy; 2026 Online Examination Registration System | Tech University
 
-            <tr>
-                <td>Database Systems</td>
-                <td>15 July 2026</td>
-                <td>Main Hall</td>
-            </tr>
+    </p>
 
-            <tr>
-                <td>Networking</td>
-                <td>18 July 2026</td>
-                <td>Room B12</td>
-            </tr>
-
-        </table>
-
-    </section>
-
-
-    <!-- How It Works -->
-
-    <section class="steps">
-
-        <h2>How It Works</h2>
-
-        <ol>
-
-            <li>Create Student Account</li>
-            <li>Login</li>
-            <li>Select Examination</li>
-            <li>Submit Registration</li>
-            <li>Receive Confirmation</li>
-
-        </ol>
-
-    </section>
-
-
-    <!-- About -->
-
-    <section class="about">
-
-        <h2>About the System</h2>
-
-        <p>
-            This platform simplifies examination registration,
-            minimizes paperwork and improves communication
-            between students and administrators.
-        </p>
-
-    </section>
-
-
-    <!-- Footer -->
-
-    <footer>
-
-        <p>
-
-            &copy; 2026 Online Exam Registration System
-
-        </p>
-
-    </footer>
-
+</footer>
 
 <script src="index.js"></script>
 
