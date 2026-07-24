@@ -85,6 +85,10 @@ Registered Students
 
 <th>Gender</th>
 
+<th>Edit</th>
+
+<th>Delete</th>
+
 </tr>
 
 
@@ -131,7 +135,26 @@ Registered Students
 
 
 <td>
-<?php echo $student['gender']; ?>
+<?php echo htmlspecialchars($student['gender']); ?>
+</td>
+
+<td>
+
+<a href="edit_student.php?id=<?php echo $student['id']; ?>">
+    <button>Edit</button>
+</a>
+
+</td>
+
+<td>
+
+<a href="delete_student.php?id=<?php echo $student['id']; ?>"
+onclick="return confirm('Are you sure you want to delete this student?');">
+
+<button>Delete</button>
+
+</a>
+
 </td>
 
 
