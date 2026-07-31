@@ -1,299 +1,1155 @@
+/* =====================================================
+   OERS - Technical University of Kenya Theme
+   ===================================================== */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
-}
-#bg-video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  
-    filter: brightness(10%);
-    z-index: -1;
+    font-family:"Segoe UI",Arial,sans-serif;
 }
 
+html{
+    scroll-behavior:smooth;
+}
 
 body{
-    color: #ccc;
+    background:#08131f;
+    color:#ffffff;
+    overflow-x:hidden;
 }
+
+/* Background Video */
+
+#bg-video{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    filter:brightness(35%);
+
+    z-index:-2;
+
+}
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background:rgba(5,18,40,.55);
+
+    z-index:-1;
+
+}
+
+/* ===========================
+   Navigation
+=========================== */
+
 .navbar{
 
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
 
-    background:transparent;
-    color:white;
+    padding:18px 60px;
 
-    padding:20px 60px;
+    position:sticky;
+
+    top:0;
+
+    backdrop-filter:blur(15px);
+
+    background:rgba(7,32,73,.75);
+
+    border-bottom:1px solid rgba(255,255,255,.12);
+
+    z-index:1000;
+
 }
 
+.logo a{
 
+    color:#fff;
+
+    text-decoration:none;
+
+    font-size:30px;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+}
 
 .nav-links{
 
     display:flex;
+
     list-style:none;
-    gap:30px;
+
+    gap:20px;
 
 }
+
+.nav-links li{
+
+    list-style:none;
+
+}
+
 .nav-links a{
 
     color:white;
+
     text-decoration:none;
+
+    padding:10px 18px;
+
+    border-radius:8px;
+
+    transition:.3s;
+
 }
+
+.nav-links a:hover{
+
+    background:#1565C0;
+
+}
+
+/* ===========================
+   Containers
+=========================== */
+
+.container{
+
+    width:100%;
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:40px;
+
+}
+
+/* ===========================
+   Glass Card
+=========================== */
+
+.login-box{
+    width:100%;
+    max-width:700px;
+    padding:30px;
+    background:rgba(255,255,255,.10);
+    backdrop-filter:blur(18px);
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,.12);
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+.login-box h1,
+.login-box h2{
+
+    text-align:center;
+
+    margin-bottom:15px;
+
+}
+
+.welcome{
+
+    text-align:center;
+
+    margin-bottom:25px;
+
+    color:#d6e5ff;
+
+}
+
+/* ===========================
+   Forms
+=========================== */
+
+.input-group{
+
+    margin-bottom:18px;
+
+}
+
+.input-group label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+}
+
+.input-group input,
+.input-group select{
+
+    width:100%;
+
+    padding:13px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:rgba(255,255,255,.15);
+
+    color:white;
+
+    font-size:15px;
+
+}
+
+.input-group input::placeholder{
+
+    color:#d8d8d8;
+
+}
+
+.input-group input:focus,
+.input-group select:focus{
+
+    outline:none;
+
+    box-shadow:0 0 8px #42A5F5;
+
+}
+
+/* ===========================
+   Buttons
+=========================== */
+
+button{
+
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#1565C0;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    background:#0D47A1;
+
+    transform:translateY(-2px);
+
+}
+/* =====================================================
+   HERO SECTION
+===================================================== */
 
 .hero{
 
     text-align:center;
-    padding:100px 20px;
 
-    background:transparent;
+    padding:100px 20px;
 
 }
 
 .hero h1{
 
-    font-size:45px;
+    font-size:52px;
+
     margin-bottom:20px;
+
+    color:#ffffff;
+
+    text-shadow:2px 2px 8px rgba(0,0,0,.5);
 
 }
 
 .hero p{
 
     font-size:20px;
-    margin-bottom:30px;
+
+    width:80%;
+
+    max-width:800px;
+
+    margin:auto;
+
+    margin-bottom:35px;
+
+    line-height:1.8;
+
+    color:#e5e5e5;
 
 }
 
 .hero button{
 
-    padding:15px 35px;
-    background:rgb(20, 58, 250);
-    color:white;
-    border:none;
-    cursor:pointer;
-    border-radius:5px;
+    width:auto;
+
+    padding:15px 40px;
 
 }
 
+/* =====================================================
+   FEATURES
+===================================================== */
+
 .features{
 
-    padding:60px;
+    padding:70px 40px;
+
 }
 
 .features h2{
 
     text-align:center;
+
     margin-bottom:40px;
+
+    font-size:34px;
 
 }
 
 .cards{
 
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:25px;
+
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+    gap:30px;
 
 }
 
 .card{
 
-    background:transparent;
-    padding:25px;
-    border-radius:10px;
-    text-align:center;
-    box-shadow:0 0 10px rgb(253, 253, 253);
+    background:rgba(255,255,255,.08);
 
-}
+    backdrop-filter:blur(15px);
 
-.exam-section{
+    border-radius:18px;
 
-    padding:60px;
-}
+    padding:30px;
 
-.exam-section table{
-
-    width:100%;
-    border-collapse:collapse;
-
-}
-
-.exam-section th,
-.exam-section td{
-
-    border:1px solid #ccc;
-    padding:15px;
     text-align:center;
 
-}
+    border:1px solid rgba(255,255,255,.12);
 
-.exam-section th{
-
-    background:transparent;
-    color:white;
+    transition:.35s;
 
 }
 
-.steps{
+.card:hover{
 
-    padding:60px;
-}
+    transform:translateY(-8px);
 
-.steps ol{
-
-    margin-left:25px;
-    line-height:2;
+    box-shadow:0 12px 25px rgba(0,0,0,.4);
 
 }
 
-.about{
+.card h3{
 
-    padding:60px;
-    text-align:center;
-}
-
-footer{
-
-    background:transparent;
-    color:white;
-    text-align:center;
-    padding:20px;
-
-}
-button{
-    width:40%;
-    padding:12px;
-    border:none;
-    border-radius:8px;
-    background:#2196F3;
-    color:white;
-    font-size:18px;
-    cursor:pointer;
-}
-
-button:hover{
-    background:#2baa00;
-}
-.input-group{
-    margin-bottom:18px;
-}
-
-
-.input-group select{
-    width:100%;
-    padding:12px;
-    border:none;
-    border-radius:8px;
-    font-size:16px;
-}
-.login-box{
-    width:380px;
-    padding:35px;
-    background:transparent;
-    backdrop-filter:transparent;
-    border-radius:15px;
-    color:white;
-    box-shadow:0 0 20px rgba(0,0,0,.5);
-}
-.container{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
-}
-.login-box h1{
-    text-align:center;
-    margin-bottom:10px;
-}
-
-.welcome{
-    text-align:center;
     margin-bottom:15px;
+
+    color:#90CAF9;
+
 }
+
+.card p{
+
+    line-height:1.7;
+
+}
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
 .dashboard{
-    width:90%;
+
+    width:95%;
+
     margin:40px auto;
-    color:white;
+
 }
 
 .dashboard h1{
+
     text-align:center;
+
     margin-bottom:20px;
+
 }
 
 .dashboard-cards{
+
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:30px;
-    margin-top:40px;
+
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+
+    gap:25px;
+
+    margin-top:35px;
+
 }
 
 .dash-card{
-    background:rgba(255,255,255,.08);
+
+    background:rgba(255,255,255,.10);
+
+    backdrop-filter:blur(15px);
+
+    border-radius:18px;
+
     padding:30px;
-    border-radius:15px;
+
     text-align:center;
-    backdrop-filter:blur(8px);
-    box-shadow:0 0 20px rgba(0,0,0,.5);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    transition:.3s;
+
+}
+
+.dash-card:hover{
+
+    transform:translateY(-5px);
+
 }
 
 .dash-card h2{
-    font-size:42px;
-    color:#4CAF50;
+
+    font-size:45px;
+
+    color:#42A5F5;
+
     margin-bottom:10px;
+
 }
 
-.dashboard-menu{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
+.dashboard-links{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
     gap:20px;
+
+    margin-top:35px;
+
 }
 
-.dashboard-menu a{
-    text-decoration:none;
-    color:white;
+.dashboard-links a{
+
+    display:block;
+
+    padding:18px;
+
+    text-align:center;
+
     background:#1565C0;
-    padding:15px 30px;
-    border-radius:8px;
+
+    color:white;
+
+    border-radius:12px;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
     transition:.3s;
+
 }
 
-.dashboard-menu a:hover{
+.dashboard-links a:hover{
+
     background:#0D47A1;
+
+    transform:translateY(-4px);
+
 }
+
+/* =====================================================
+   TABLES
+===================================================== */
+
 table{
     width:100%;
     border-collapse:collapse;
+    margin-top:15px;
     background:rgba(255,255,255,.08);
-    backdrop-filter:blur(10px);
-    color:white;
+    border-radius:12px;
+    overflow:hidden;
+    font-size:14px;
 }
 
 table th{
     background:#1565C0;
     padding:12px;
+    white-space:nowrap;
 }
 
 table td{
     padding:10px;
-    text-align:center;
+    white-space:nowrap;
 }
 
 table tr:hover{
-    background:rgba(255,255,255,.1);
+    background:rgba(255,255,255,.08);
 }
 
+
+table tr:nth-child(even){
+
+    background:rgba(255,255,255,.03);
+
+}
+
+
 table a{
-    color:#00E5FF;
+
+    color:#90CAF9;
+
     text-decoration:none;
+
+    font-weight:bold;
+
 }
 
 table a:hover{
-    text-decoration:underline;
+
+    color:white;
+
+}
+.table-responsive{
+    width:100%;
+    overflow-x:auto;
+}
+/* =====================================================
+   EXAMINATION SECTION
+===================================================== */
+
+.exam-section{
+
+    width:95%;
+
+    margin:auto;
+
+    padding:60px 20px;
+
+}
+
+.exam-section h2{
+
+    text-align:center;
+
+    font-size:34px;
+
+    margin-bottom:30px;
+
+}
+
+.exam-section p{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+    color:#d8d8d8;
+
+}
+
+/* =====================================================
+   ABOUT SECTION
+===================================================== */
+
+.about{
+
+    width:90%;
+
+    margin:auto;
+
+    padding:70px 20px;
+
+    text-align:center;
+
+}
+
+.about h2{
+
+    font-size:36px;
+
+    margin-bottom:20px;
+
+    color:#90CAF9;
+
+}
+
+.about p{
+
+    max-width:900px;
+
+    margin:auto;
+
+    line-height:1.9;
+
+    font-size:18px;
+
+}
+
+/* =====================================================
+   STEPS SECTION
+===================================================== */
+
+.steps{
+
+    width:90%;
+
+    margin:auto;
+
+    padding:70px 20px;
+
+}
+
+.steps h2{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+    font-size:34px;
+
+}
+
+.steps ol{
+
+    max-width:700px;
+
+    margin:auto;
+
+    line-height:2.2;
+
+    font-size:18px;
+
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+
+    margin-top:50px;
+
+    padding:25px;
+
+    text-align:center;
+
+    background:rgba(0,0,0,.45);
+
+    backdrop-filter:blur(12px);
+
+    border-top:1px solid rgba(255,255,255,.12);
+
+}
+
+footer p{
+
+    color:#dcdcdc;
+
+    font-size:15px;
+
+}
+
+/* =====================================================
+   LINKS
+===================================================== */
+
+a{
+
+    color:#90CAF9;
+
+    transition:.3s;
+
+}
+
+a:hover{
+
+    color:#ffffff;
+
+}
+
+/* =====================================================
+   HEADINGS
+===================================================== */
+
+h1,h2,h3{
+
+    letter-spacing:1px;
+
+}
+
+hr{
+
+    border:none;
+
+    height:1px;
+
+    background:rgba(255,255,255,.2);
+
+    margin:20px 0;
+
+}
+
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#0b1c30;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#1565C0;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#0D47A1;
+
+}
+
+/* =====================================================
+   RESPONSIVE DESIGN
+===================================================== */
+
+@media(max-width:900px){
+
+    .navbar{
+
+        flex-direction:column;
+
+        gap:15px;
+
+        padding:20px;
+
+    }
+
+    .nav-links{
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+
+    }
+
+    .hero h1{
+
+        font-size:38px;
+
+    }
+
+    .hero p{
+
+        width:95%;
+
+        font-size:18px;
+
+    }
+
+    .login-box{
+
+        width:95%;
+
+    }
+
+    table{
+
+        font-size:14px;
+
+    }
+
+    th,td{
+
+        padding:10px;
+
+    }
+
+}
+
+@media(max-width:600px){
+
+    .dashboard-links{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .cards{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .dashboard-cards{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .hero{
+
+        padding:70px 15px;
+
+    }
+
+    .hero h1{
+
+        font-size:30px;
+
+    }
+
+}
+/* =====================================================
+   OERS PROFESSIONAL FINISH
+   Technical University of Kenya Theme
+===================================================== */
+
+/* Logo */
+
+.logo a{
+
+    color:#FFD54F;
+
+    font-weight:700;
+
+    text-shadow:0 0 10px rgba(255,213,79,.4);
+
+}
+
+/* Dashboard Statistics */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+    gap:15px;
+    margin:25px 0;
+}
+
+
+
+.stat-card{
+    background:linear-gradient(135deg,#1565C0,#0D47A1);
+    padding:18px;
+    border-radius:15px;
+    text-align:center;
+    transition:.3s;
+}
+
+.stat-card h2{
+    font-size:30px;
+}
+
+.stat-card p{
+    font-size:15px;
+}
+.stat-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+
+
+/* Status Badges */
+
+.badge{
+
+    padding:7px 14px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+    display:inline-block;
+
+}
+
+.badge-approved{
+
+    background:#2E7D32;
+
+    color:white;
+
+}
+
+.badge-pending{
+
+    background:#EF6C00;
+
+    color:white;
+
+}
+
+.badge-rejected{
+
+    background:#C62828;
+
+    color:white;
+
+}
+
+/* Action Buttons */
+
+.btn-edit{
+
+    background:#1976D2;
+
+    color:white;
+
+    padding:8px 15px;
+
+    border-radius:8px;
+
+    text-decoration:none;
+
+}
+
+.btn-edit:hover{
+
+    background:#0D47A1;
+
+}
+
+.btn-delete{
+
+    background:#D32F2F;
+
+    color:white;
+
+    padding:8px 15px;
+
+    border-radius:8px;
+
+    text-decoration:none;
+
+}
+
+.btn-delete:hover{
+
+    background:#B71C1C;
+
+}
+
+.btn-success{
+
+    background:#2E7D32;
+
+    color:white;
+
+    padding:8px 15px;
+
+    border-radius:8px;
+
+    text-decoration:none;
+
+}
+
+.btn-success:hover{
+
+    background:#1B5E20;
+
+}
+
+/* Glass Panels */
+
+.panel{
+
+    background:rgba(255,255,255,.08);
+
+    border-radius:18px;
+
+    padding:25px;
+
+    backdrop-filter:blur(15px);
+
+    border:1px solid rgba(255,255,255,.1);
+
+}
+
+/* Page Fade */
+
+.container{
+
+    animation:fadeIn .8s ease;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* Better Tables */
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin-top:20px;
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(10px);
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+
+}
+
+table th{
+
+    background:#1565C0;
+
+    color:white;
+
+    padding:18px;
+
+    font-size:16px;
+
+    text-align:center;
+
+}
+
+table td{
+
+    padding:18px;
+
+    text-align:center;
+
+    border-bottom:1px solid rgba(255,255,255,.15);
+
+    color:white;
+
+}
+
+table tr:hover{
+
+    background:rgba(255,255,255,.12);
+
+}
+table th,
+table td{
+
+    min-width:120px;
+
+}
+
+
+
+/* Better Buttons */
+
+button{
+
+    letter-spacing:.5px;
+
+}
+
+button:active{
+
+    transform:scale(.97);
+
+}
+
+/* Footer */
+
+footer{
+
+    color:#ffffff;
+
+}
+
+footer::before{
+
+    content:"Online Examination Registration System | Technical University of Kenya";
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-weight:bold;
+
+    color:#90CAF9;
+
 }

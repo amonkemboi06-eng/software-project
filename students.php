@@ -4,26 +4,20 @@ session_start();
 
 include "db.php";
 
-
 // Protect admin page
-
 if (!isset($_SESSION['user']) || $_SESSION['role'] != "admin") {
-
     header("Location: login.php");
     exit();
-
 }
 
-
 // Get students
-
 $query = "SELECT * FROM students ORDER BY id DESC";
-
 $result = $conn->query($query);
 
+// Count students
+$totalStudents = $conn->query("SELECT COUNT(*) AS total FROM students")->fetch_assoc()['total'];
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,38 +34,33 @@ $result = $conn->query($query);
 
 </head>
 
-
 <body>
-
 
 <video autoplay muted loop id="bg-video">
     <source src="VID1.mp4" type="video/mp4">
 </video>
 
-
 <?php include "menu.php"; ?>
-
 
 <div class="container">
 
+<div class="login-box" style="width:95%; max-width:1300px;">
 
-<div class="login-box" style="width:90%;">
-
-
-<h2 style="text-align:center;">
+<h1 style="text-align:center;">
 Registered Students
-</h2>
+</h1>
 
+<p class="welcome">
+Total Registered Students: <strong><?php echo $totalStudents; ?></strong>
+</p>
 
-
-<table border="1" width="100%" cellpadding="10">
-
+<table>
 
 <tr>
 
-<th>ID</th>
+<th>No.</th>
 
-<th>Reg No</th>
+<th>Registration No.</th>
 
 <th>Full Name</th>
 
@@ -91,88 +80,64 @@ Registered Students
 
 </tr>
 
+<?php
 
+$number = 1;
 
-<?php while($student = $result->fetch_assoc()) { ?>
+while($student = $result->fetch_assoc()){
 
+?>
 
 <tr>
 
+<td><?php echo $number++; ?></td>
 
-<td>
-<?php echo $student['id']; ?>
-</td>
+<td><?php echo htmlspecialchars($student['reg_no']); ?></td>
 
+<td><?php echo htmlspecialchars($student['full_name']); ?></td>
 
-<td>
-<?php echo $student['reg_no']; ?>
-</td>
+<td><?php echo htmlspecialchars($student['email']); ?></td>
 
+<td><?php echo htmlspecialchars($student['phone']); ?></td>
 
-<td>
-<?php echo $student['full_name']; ?>
-</td>
+<td><?php echo htmlspecialchars($student['course']); ?></td>
 
+<td><?php echo htmlspecialchars($student['year_of_study']); ?></td>
 
-<td>
-<?php echo $student['email']; ?>
-</td>
-
-
-<td>
-<?php echo $student['phone']; ?>
-</td>
-
-
-<td>
-<?php echo $student['course']; ?>
-</td>
-
-
-<td>
-<?php echo $student['year_of_study']; ?>
-</td>
-
-
-<td>
-<?php echo htmlspecialchars($student['gender']); ?>
-</td>
+<td><?php echo htmlspecialchars($student['gender']); ?></td>
 
 <td>
 
-<a href="edit_student.php?id=<?php echo $student['id']; ?>">
-    <button>Edit</button>
+<a class="btn-edit"
+href="edit_student.php?id=<?php echo $student['id']; ?>">
+
+Edit
+
 </a>
 
 </td>
 
 <td>
 
-<a href="delete_student.php?id=<?php echo $student['id']; ?>"
+<a class="btn-delete"
+href="delete_student.php?id=<?php echo $student['id']; ?>"
 onclick="return confirm('Are you sure you want to delete this student?');">
 
-<button>Delete</button>
+Delete
 
 </a>
 
 </td>
-
 
 </tr>
 
-
 <?php } ?>
-
 
 </table>
 
-
-
 </div>
 
-
 </div>
-
 
 </body>
 

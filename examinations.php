@@ -1,19 +1,16 @@
 <?php
-
 session_start();
 
 include "db.php";
 
-
 // Get examinations
-
 $query = "SELECT * FROM examinations ORDER BY exam_date ASC";
-
 $result = $conn->query($query);
 
+// Count examinations
+$totalExams = $conn->query("SELECT COUNT(*) AS total FROM examinations")->fetch_assoc()['total'];
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,41 +27,33 @@ $result = $conn->query($query);
 
 </head>
 
-
 <body>
-
 
 <video autoplay muted loop id="bg-video">
     <source src="VID1.mp4" type="video/mp4">
 </video>
 
-
 <?php include "menu.php"; ?>
-
-
 
 <div class="container">
 
+<div class="login-box" style="width:95%; max-width:1300px;">
 
-<div class="login-box" style="width:90%;">
-
-
-
-<h2 style="text-align:center;">
+<h1 style="text-align:center;">
 Available Examinations
-</h2>
+</h1>
 
-
+<p class="welcome">
+Total Examinations: <strong><?php echo $totalExams; ?></strong>
+</p>
 
 <?php if(isset($_SESSION['role']) && $_SESSION['role']=="admin"){ ?>
 
-<p style="text-align:center;">
+<p style="text-align:center; margin-bottom:20px;">
 
-<a href="add_exam.php">
+<a class="btn-success" href="add_exam.php">
 
-<button>
-Add Examination
-</button>
+➕ Add Examination
 
 </a>
 
@@ -72,14 +61,11 @@ Add Examination
 
 <?php } ?>
 
-
-
-<table border="1" width="100%" cellpadding="10">
-
+<table>
 
 <tr>
 
-<th>ID</th>
+<th>No.</th>
 
 <th>Unit Code</th>
 
@@ -91,60 +77,74 @@ Add Examination
 
 <th>Venue</th>
 
-</tr>
+<?php if(isset($_SESSION['role']) && $_SESSION['role']=="admin"){ ?>
 
+<th>Edit</th>
 
-
-<?php while($exam = $result->fetch_assoc()){ ?>
-
-
-<tr>
-
-<td>
-<?php echo $exam['id']; ?>
-</td>
-
-
-<td>
-<?php echo $exam['unit_code']; ?>
-</td>
-
-
-<td>
-<?php echo $exam['unit_name']; ?>
-</td>
-
-
-<td>
-<?php echo $exam['exam_date']; ?>
-</td>
-
-
-<td>
-<?php echo $exam['exam_time']; ?>
-</td>
-
-
-<td>
-<?php echo $exam['venue']; ?>
-</td>
-
-
-</tr>
-
+<th>Delete</th>
 
 <?php } ?>
 
+</tr>
+
+<?php
+
+$number = 1;
+
+while($exam = $result->fetch_assoc()){
+
+?>
+
+<tr>
+
+<td><?php echo $number++; ?></td>
+
+<td><?php echo htmlspecialchars($exam['unit_code']); ?></td>
+
+<td><?php echo htmlspecialchars($exam['unit_name']); ?></td>
+
+<td><?php echo htmlspecialchars($exam['exam_date']); ?></td>
+
+<td><?php echo htmlspecialchars($exam['exam_time']); ?></td>
+
+<td><?php echo htmlspecialchars($exam['venue']); ?></td>
+
+<?php if(isset($_SESSION['role']) && $_SESSION['role']=="admin"){ ?>
+
+<td>
+
+<a class="btn-edit"
+href="edit_exam.php?id=<?php echo $exam['id']; ?>">
+
+Edit
+
+</a>
+
+</td>
+
+<td>
+
+<a class="btn-delete"
+href="delete_exam.php?id=<?php echo $exam['id']; ?>"
+onclick="return confirm('Delete this examination?');">
+
+Delete
+
+</a>
+
+</td>
+
+<?php } ?>
+
+</tr>
+
+<?php } ?>
 
 </table>
 
-
-
 </div>
 
-
 </div>
-
 
 </body>
 

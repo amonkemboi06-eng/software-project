@@ -4,66 +4,42 @@ session_start();
 
 include "db.php";
 
-
 // Protect admin page
-
 if (!isset($_SESSION['user']) || $_SESSION['role'] != "admin") {
-
     header("Location: login.php");
     exit();
-
 }
 
-
-
 // Get registrations
-
 $query = "
-
 SELECT
-
 exam_registrations.id,
-
 students.reg_no,
-
 students.full_name,
-
 examinations.unit_code,
-
 examinations.unit_name,
-
 examinations.exam_date,
-
 examinations.exam_time,
-
 examinations.venue,
-
 exam_registrations.status
-
 
 FROM exam_registrations
 
-
 INNER JOIN students
-
 ON exam_registrations.student_id = students.id
 
-
 INNER JOIN examinations
-
 ON exam_registrations.examination_id = examinations.id
 
-
 ORDER BY exam_registrations.registered_at DESC
-
 ";
-
 
 $result = $conn->query($query);
 
+// Count registrations
+$totalRegistrations = $conn->query("SELECT COUNT(*) AS total FROM exam_registrations")->fetch_assoc()['total'];
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -74,42 +50,39 @@ $result = $conn->query($query);
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Registrations | OERS</title>
+<title>Exam Registrations | OERS</title>
 
 <link rel="stylesheet" href="style.css">
 
 </head>
 
-
 <body>
-
 
 <video autoplay muted loop id="bg-video">
     <source src="VID1.mp4" type="video/mp4">
 </video>
 
-
 <?php include "menu.php"; ?>
-
 
 <div class="container">
 
+<div class="login-box" style="width:95%; max-width:1400px;">
 
-<div class="login-box" style="width:95%;">
-
-
-<h2 style="text-align:center;">
+<h1 style="text-align:center;">
 Exam Registrations
-</h2>
+</h1>
 
+<p class="welcome">
+Total Registrations: <strong><?php echo $totalRegistrations; ?></strong>
+</p>
 
-
-<table border="1" width="100%" cellpadding="10">
-
+<table>
 
 <tr>
 
-<th>Reg No</th>
+<th>No.</th>
+
+<th>Registration No.</th>
 
 <th>Student Name</th>
 
@@ -129,86 +102,82 @@ Exam Registrations
 
 </tr>
 
+<?php
 
+$number = 1;
 
-<?php while($row = $result->fetch_assoc()){ ?>
+while($row = $result->fetch_assoc()){
 
+?>
 
 <tr>
 
+<td><?php echo $number++; ?></td>
 
-<td>
-<?php echo $row['reg_no']; ?>
-</td>
+<td><?php echo htmlspecialchars($row['reg_no']); ?></td>
 
+<td><?php echo htmlspecialchars($row['full_name']); ?></td>
 
-<td>
-<?php echo $row['full_name']; ?>
-</td>
+<td><?php echo htmlspecialchars($row['unit_code']); ?></td>
 
+<td><?php echo htmlspecialchars($row['unit_name']); ?></td>
 
-<td>
-<?php echo $row['unit_code']; ?>
-</td>
+<td><?php echo htmlspecialchars($row['exam_date']); ?></td>
 
+<td><?php echo htmlspecialchars($row['exam_time']); ?></td>
 
-<td>
-<?php echo $row['unit_name']; ?>
-</td>
-
-
-<td>
-<?php echo $row['exam_date']; ?>
-</td>
-
-
-<td>
-<?php echo $row['exam_time']; ?>
-</td>
-
-
-<td>
-<?php echo $row['venue']; ?>
-</td>
-
-
-
-<td>
-<?php echo $row['status']; ?>
-</td>
+<td><?php echo htmlspecialchars($row['venue']); ?></td>
 
 <td>
 
-<?php if($row['status'] == "Pending"){ ?>
+<?php if($row['status']=="Approved"){ ?>
 
-    <a href="approve_registration.php?id=<?php echo $row['id']; ?>">
-        <button>Approve</button>
-    </a>
+<span class="badge badge-approved">
+
+Approved
+
+</span>
 
 <?php } else { ?>
 
-    Approved
+<span class="badge badge-pending">
+
+Pending
+
+</span>
 
 <?php } ?>
 
 </td>
 
+<td>
 
+<?php if($row['status']=="Pending"){ ?>
 
-</tr>
+<a class="btn-success"
+href="approve_registration.php?id=<?php echo $row['id']; ?>">
 
+Approve
+
+</a>
+
+<?php } else { ?>
+
+—
 
 <?php } ?>
 
+</td>
+
+</tr>
+
+<?php } ?>
 
 </table>
 
-
 </div>
 
-
 </div>
-
 
 </body>
 

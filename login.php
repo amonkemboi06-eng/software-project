@@ -22,7 +22,8 @@ if(isset($_SESSION['user']) && isset($_SESSION['role'])){
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Login | OERS</title>
+<title>Login |OERS</title>
+
 
 <link rel="stylesheet" href="style.css">
 
@@ -38,7 +39,7 @@ if(isset($_SESSION['user']) && isset($_SESSION['role'])){
 
 <div class="container">
 
-<div class="login-box">
+<div class="login-box" style="width:98%; max-width:1400px;">
 
 <h1>Online Examination Registration System</h1>
 
@@ -78,7 +79,13 @@ Login
 
 <br>
 
+
+<p style="text-align:center; margin-top:15px;">
+    <a href="forgot_password.php">Forgot Password?</a>
+</p><br><br>
+
 <p style="text-align:center;">
+   
 
 Don't have an account?
 

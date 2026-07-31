@@ -1,7 +1,6 @@
 <?php
 
 session_start();
-
 include "db.php";
 
 // Protect admin page
@@ -21,6 +20,38 @@ $pendingRegistrations = $conn->query("SELECT COUNT(*) AS total FROM exam_registr
 
 $approvedRegistrations = $conn->query("SELECT COUNT(*) AS total FROM exam_registrations WHERE status='Approved'")->fetch_assoc()['total'];
 
+
+// Latest Students
+$students = $conn->query("
+SELECT reg_no, full_name, course
+FROM students
+ORDER BY id DESC
+LIMIT 5
+");
+
+// Latest Examinations
+$exams = $conn->query("
+SELECT unit_code, unit_name, exam_date, venue
+FROM examinations
+ORDER BY exam_date ASC
+LIMIT 5
+");
+
+// Latest Registrations
+$registrations = $conn->query("
+SELECT
+students.full_name,
+examinations.unit_name,
+exam_registrations.status
+FROM exam_registrations
+JOIN students
+ON exam_registrations.student_id = students.id
+JOIN examinations
+ON exam_registrations.examination_id = examinations.id
+ORDER BY exam_registrations.id DESC
+LIMIT 5
+");
+
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +63,7 @@ $approvedRegistrations = $conn->query("SELECT COUNT(*) AS total FROM exam_regist
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Admin Dashboard | OERS</title>
+<title>Administrator Dashboard | OERS</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -48,64 +79,145 @@ $approvedRegistrations = $conn->query("SELECT COUNT(*) AS total FROM exam_regist
 
 <div class="container">
 
-<div class="login-box" style="width:90%;">
+<div class="login-box" style="width:95%; max-width:1200px;">
 
 <h1 style="text-align:center;">
-Welcome, <?php echo htmlspecialchars($_SESSION['user']); ?>
+Welcome,
+<?php echo htmlspecialchars($_SESSION['user']); ?>
 </h1>
 
-<p class="welcome" style="text-align:center;">
-Administrator Dashboard
-</p>
 
-<hr><br>
 
-<h2>System Statistics</h2>
+<div class="stats">
 
-<table border="1" width="100%" cellpadding="12">
+<div class="stat-card">
+<h2><?php echo $totalStudents; ?></h2>
+<p>Total Students</p>
+</div>
+
+<div class="stat-card">
+<h2><?php echo $totalExams; ?></h2>
+<p>Total Examinations</p>
+</div>
+
+<div class="stat-card">
+<h2><?php echo $totalRegistrations; ?></h2>
+<p>Total Registrations</p>
+</div>
+
+<div class="stat-card">
+<h2><?php echo $pendingRegistrations; ?></h2>
+<p>Pending</p>
+</div>
+
+<div class="stat-card">
+<h2><?php echo $approvedRegistrations; ?></h2>
+<p>Approved</p>
+</div>
+
+</div>
+
+<br>
+
+<h2>Recent Students</h2>
+
+<table border="1" width="100%" cellpadding="10">
 
 <tr>
-    <th>Total Students</th>
-    <td><?php echo $totalStudents; ?></td>
+<th>Registration No.</th>
+<th>Student Name</th>
+<th>Course</th>
 </tr>
 
-<tr>
-    <th>Total Examinations</th>
-    <td><?php echo $totalExams; ?></td>
-</tr>
+<?php while($student = $students->fetch_assoc()){ ?>
 
 <tr>
-    <th>Total Registrations</th>
-    <td><?php echo $totalRegistrations; ?></td>
+
+<td><?php echo $student['reg_no']; ?></td>
+
+<td><?php echo $student['full_name']; ?></td>
+
+<td><?php echo $student['course']; ?></td>
+
 </tr>
 
-<tr>
-    <th>Pending Registrations</th>
-    <td><?php echo $pendingRegistrations; ?></td>
-</tr>
-
-<tr>
-    <th>Approved Registrations</th>
-    <td><?php echo $approvedRegistrations; ?></td>
-</tr>
+<?php } ?>
 
 </table>
 
 <br>
 
-<h2>Quick Links</h2>
+<h2>Upcoming Examinations</h2>
 
-<div class="dashboard-links">
+<table border="1" width="100%" cellpadding="10">
 
-<a href="students.php">Manage Students</a>
+<tr>
 
-<a href="examinations.php">Manage Examinations</a>
+<th>Unit Code</th>
 
-<a href="add_exam.php">Add Examination</a>
+<th>Unit Name</th>
 
-<a href="registrations.php">View Registrations</a>
+<th>Date</th>
 
-<a href="logout.php">Logout</a>
+<th>Venue</th>
+
+</tr>
+
+<?php while($exam = $exams->fetch_assoc()){ ?>
+
+<tr>
+
+<td><?php echo $exam['unit_code']; ?></td>
+
+<td><?php echo $exam['unit_name']; ?></td>
+
+<td><?php echo $exam['exam_date']; ?></td>
+
+<td><?php echo $exam['venue']; ?></td>
+
+</tr>
+
+<?php } ?>
+
+</table>
+
+<br>
+
+<h2>Latest Registrations</h2>
+
+<table border="1" width="100%" cellpadding="10">
+
+<tr>
+
+<th>Student</th>
+
+<th>Unit</th>
+
+<th>Status</th>
+
+</tr>
+
+<?php while($row = $registrations->fetch_assoc()){ ?>
+
+<tr>
+
+<td><?php echo $row['full_name']; ?></td>
+
+<td><?php echo $row['unit_name']; ?></td>
+
+<td><?php echo $row['status']; ?></td>
+
+</tr>
+
+<?php } ?>
+
+</table>
+
+<br>
+
+<div style="text-align:center;">
+
+
 
 </div>
 
