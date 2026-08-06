@@ -53,14 +53,14 @@ Total Examinations: <strong><?php echo $totalExams; ?></strong>
 
 <a class="btn-success" href="add_exam.php">
 
-➕ Add Examination
+Add Examination
 
 </a>
 
 </p>
 
 <?php } ?>
-
+<div class="table-responsive">
 <table>
 
 <tr>
@@ -141,7 +141,7 @@ Delete
 <?php } ?>
 
 </table>
-
+</div>
 </div>
 
 </div>

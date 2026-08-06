@@ -97,7 +97,7 @@ My Registered Exams
 </h2>
 
 
-
+<div class="table-responsive">
 <table border="1" width="100%" cellpadding="10">
 
 
@@ -162,7 +162,7 @@ My Registered Exams
 
 
 </table>
-
+</div>
 
 </div>
 

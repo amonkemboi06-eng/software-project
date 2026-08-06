@@ -6,69 +6,39 @@ session_start();
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Online Examination Registration System</title>
-
 <link rel="stylesheet" href="style.css">
-
 </head>
-
 <body>
-
 <video autoplay muted loop id="bg-video">
     <source src="VID1.mp4" type="video/mp4">
 </video>
-
 <?php include "menu.php"; ?>
-
 <!-- HERO SECTION -->
-
 <section class="hero">
-
 <h1>
-
 Online Examination Registration System
-
 </h1>
-
 <p>
-
 Welcome to the <strong>Tech University</strong> Online Examination Registration System (OERS). <br>Register your examinations quickly, securely, and conveniently from anywhere.
 
 </p>
-
 <div class="hero-buttons">
-
 <a href="register.php">
-
 <button>
-
 Create Account
-
 </button>
-
 </a>
-
 <a href="login.php">
-
 <button>
-
 Login
-
 </button>
-
 </a>
-
 </div>
-
 </section>
-
 <!-- FEATURES -->
-
 <section class="features">
 
 <h2>

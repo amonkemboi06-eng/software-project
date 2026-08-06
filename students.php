@@ -27,7 +27,6 @@ $totalStudents = $conn->query("SELECT COUNT(*) AS total FROM students")->fetch_a
 <meta charset="UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Students | OERS</title>
 
 <link rel="stylesheet" href="style.css">
@@ -53,6 +52,7 @@ Registered Students
 <p class="welcome">
 Total Registered Students: <strong><?php echo $totalStudents; ?></strong>
 </p>
+<div class="table-responsive">
 
 <table>
 
@@ -134,7 +134,7 @@ Delete
 <?php } ?>
 
 </table>
-
+</div>
 </div>
 
 </div>

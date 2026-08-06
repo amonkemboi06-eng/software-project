@@ -75,7 +75,7 @@ Exam Registrations
 <p class="welcome">
 Total Registrations: <strong><?php echo $totalRegistrations; ?></strong>
 </p>
-
+<div class="table-responsive">
 <table>
 
 <tr>
@@ -174,7 +174,7 @@ Approve
 <?php } ?>
 
 </table>
-
+</div>
 </div>
 
 </div>

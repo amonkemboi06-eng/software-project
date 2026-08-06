@@ -14,9 +14,19 @@ html{
 }
 
 body{
-    background:#08131f;
-    color:#ffffff;
+    background:#3788d8;
+    color:#f4eeee;
     overflow-x:hidden;
+}
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 100%;
+    max-width: 100%;
 }
 
 /* Background Video */
@@ -143,7 +153,7 @@ body::before{
 
     width:100%;
 
-    min-height:100vh;
+   max-width: 1000px;
 
     display:flex;
 
@@ -152,6 +162,8 @@ body::before{
     align-items:center;
 
     padding:40px;
+
+    margin: auto;
 
 }
 
@@ -273,7 +285,7 @@ button{
 
 button:hover{
 
-    background:#0D47A1;
+    background:#1af313;
 
     transform:translateY(-2px);
 
@@ -388,7 +400,7 @@ button:hover{
 
     margin-bottom:15px;
 
-    color:#90CAF9;
+    color:#03b71b;
 
 }
 
@@ -458,7 +470,7 @@ button:hover{
 
     font-size:45px;
 
-    color:#42A5F5;
+    color:#4fe20a;
 
     margin-bottom:10px;
 
@@ -484,9 +496,9 @@ button:hover{
 
     text-align:center;
 
-    background:#1565C0;
+    background:#121213;
 
-    color:white;
+    color:rgb(244, 237, 237);
 
     border-radius:12px;
 
@@ -500,7 +512,7 @@ button:hover{
 
 .dashboard-links a:hover{
 
-    background:#0D47A1;
+    background:#1cfb15;
 
     transform:translateY(-4px);
 
@@ -514,10 +526,11 @@ table{
     width:100%;
     border-collapse:collapse;
     margin-top:15px;
-    background:rgba(255,255,255,.08);
+    background:rgba(4, 203, 193, 0.266);
     border-radius:12px;
     overflow:hidden;
     font-size:14px;
+    table-layout: auto;
 }
 
 table th{
@@ -558,9 +571,9 @@ table a:hover{
     color:white;
 
 }
-.table-responsive{
-    width:100%;
-    overflow-x:auto;
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
 }
 /* =====================================================
    EXAMINATION SECTION
@@ -826,7 +839,8 @@ hr{
 
 }
 
-@media(max-width:600px){
+@media(max-width:768px){
+   
 
     .dashboard-links{
 

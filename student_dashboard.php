@@ -180,7 +180,7 @@ My Registered Examinations
 </h2>
 
 
-
+<div class="table-responsive">
 <table border="1" width="100%" cellpadding="10">
 
 
@@ -245,7 +245,7 @@ My Registered Examinations
 
 
 </table>
-
+</div>
 
 
 
@@ -262,7 +262,7 @@ Available Examinations
 </h2>
 
 <form method="POST" action="register_exam.php">
-
+<div class="table-responsive">
 <table border="1" width="100%" cellpadding="10">
 
 <tr>
@@ -299,7 +299,7 @@ Available Examinations
 <?php } ?>
 
 </table>
-
+</div>
 <br>
 
 <button type="submit">

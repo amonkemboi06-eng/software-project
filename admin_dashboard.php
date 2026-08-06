@@ -120,6 +120,7 @@ Welcome,
 <br>
 
 <h2>Recent Students</h2>
+<div class="table-responsive">
 
 <table border="1" width="100%" cellpadding="10">
 
@@ -142,13 +143,13 @@ Welcome,
 </tr>
 
 <?php } ?>
-
+<div class="table-responsive">
 </table>
-
+</div>
 <br>
 
 <h2>Upcoming Examinations</h2>
-
+<div class="table-responsive">
 <table border="1" width="100%" cellpadding="10">
 
 <tr>
@@ -178,13 +179,12 @@ Welcome,
 </tr>
 
 <?php } ?>
-
 </table>
-
+</div>
 <br>
 
 <h2>Latest Registrations</h2>
-
+<div class="table-responsive">
 <table border="1" width="100%" cellpadding="10">
 
 <tr>
@@ -212,7 +212,8 @@ Welcome,
 <?php } ?>
 
 </table>
-
+</div>
+</div>
 <br>
 
 <div style="text-align:center;">
