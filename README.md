@@ -1,271 +1,684 @@
- OERS — Online Examination Registration System
+# Online Exam Registration System (OERS)
 
- About the Project
+## 1. Project Overview
 
-The **Online Examination Registration System (OERS)** is a web-based application developed to simplify and digitize the examination registration process for students.
+The **Online Exam Registration System (OERS)** is a web-based system developed to simplify and digitize the examination registration process for students and administrators.
 
-The system provides students with an easy way to create an account, log in, view available examinations, register for examinations, and track their registration status. It also provides administrators with a dashboard where they can manage students, examinations, and examination registration requests.
+The system replaces a largely manual examination registration process with an online platform where students can create accounts, log in, view available examinations, submit examination registration requests, and monitor the status of their registrations.
 
-The project was developed as an academic project at the **Technical University of Kenya (TUK)**.
+Administrators can log in to an administrative dashboard, manage examinations, view registered students, monitor registration requests, and approve or reject student registrations.
 
----
-
- Features
-
- Student Features
-
-* Student account registration
-* Student login and authentication
-* Student dashboard
-* View available examinations
-* Register for examinations
-* View registered examinations
-* Check registration status
-* View approved and pending registrations
-* Forgot password functionality
-* Secure logout
-
- Admin Features
-
-* Administrator login
-* Admin dashboard
-* View system statistics
-* Manage student records
-* Manage examinations
-* View examination registrations
-* Approve or reject registration requests
-* Monitor pending and approved registrations
-* View system logs
-* Secure logout
+The system was developed as part of the **Industry-Based Learning (IBL) / Software Development Life Cycle (SDLC)** module.
 
 ---
 
- Technologies Used
+## 2. Main Objectives
 
-The project was developed using the following technologies:
+The main objectives of OERS are to:
 
-* **PHP** — Backend development and server-side logic
-* **MySQL** — Database management
-* **HTML5** — Structure of the web pages
-* **CSS3** — Styling and responsive design
-* **JavaScript** — Client-side functionality
-* **Bootstrap** — Responsive user interface
-* **XAMPP** — Local development environment
-* **phpMyAdmin** — Database administration
-
----
-
- Database
-
-The system uses a MySQL database named:
-
-```text
-oers_db
-```
-
-The main database tables include:
-
-```text
-admins
-students
-examinations
-exams
-exam_registrations
-logs
-```
-
-These tables are used to store student information, administrator accounts, examination details, registration records, and system activity.
+* Provide students with an online examination registration platform.
+* Reduce manual paperwork and physical registration processes.
+* Allow students to view available examinations.
+* Allow students to submit examination registration requests.
+* Allow students to track their registration status.
+* Allow administrators to manage examinations.
+* Allow administrators to manage and monitor student registrations.
+* Improve the accuracy and organization of examination registration records.
+* Provide a centralized database for storing examination registration information.
 
 ---
 
- How the System Works
+## 3. Main Users
 
-### Student Process
+### Students
 
-```text
-Register Account
-       ↓
-     Login
-       ↓
-Student Dashboard
-       ↓
-View Examinations
-       ↓
-Register for Examination
-       ↓
-Track Registration Status
-```
+Students are the primary users of the system. They can:
 
-A student can create an account and access the system after logging in. Available examinations can be viewed from the dashboard, and the student can submit an examination registration request. The registration can then be tracked as it moves through the approval process.
+* Create an account.
+* Log in to the system.
+* Access their student dashboard.
+* View available examinations.
+* Register for examinations.
+* View their registered examinations.
+* Check whether their registration is pending or approved.
+* Manage their account information.
 
-### Admin Process
+### Administrators
 
-```text
-Admin Login
-     ↓
-Admin Dashboard
-     ↓
-Manage Students
-     ↓
-Manage Examinations
-     ↓
-View Registrations
-     ↓
-Approve / Reject Registration
-```
+Administrators are responsible for managing the system. They can:
 
-Administrators have access to system management features and can review examination registration requests submitted by students.
+* Log in to the administrator dashboard.
+* View system statistics.
+* Manage examinations.
+* View students.
+* View examination registrations.
+* Approve or reject registration requests.
+* Monitor the overall registration process.
 
 ---
 
- Project Structure
+## 4. Technologies Used
 
-The project contains different PHP pages and folders responsible for handling authentication, dashboards, examination registration, database connections, styling, and other system functionality.
+The system was developed using the following technologies:
 
-Example structure:
-
-```text
-student_system/
-│
-├── admin/
-├── css/
-├── js/
-├── images/
-├── config/
-│
-├── login.php
-├── register.php
-├── dashboard.php
-├── register_exam.php
-├── registrations.php
-├── forgot_password.php
-├── logout.php
-│
-└── README.md
-```
+| Technology | Purpose                       |
+| ---------- | ----------------------------- |
+| PHP        | Server-side programming       |
+| MySQL      | Database management           |
+| HTML       | Web page structure            |
+| CSS        | Styling and responsive design |
+| JavaScript | Client-side functionality     |
+| XAMPP      | Local development server      |
+| phpMyAdmin | Database management           |
+| Git        | Version control               |
+| GitHub     | Source code repository        |
 
 ---
 
- Installation
+# 5. System Requirements
 
-### 1. Install XAMPP
+Before installing the project, make sure the computer has the following:
 
-Install XAMPP and start the following services:
+* Windows, Linux, or macOS
+* XAMPP
+* PHP
+* MySQL
+* Apache
+* A modern web browser such as Chrome, Edge, or Firefox
+* Git (optional, but recommended)
+* A code editor such as Visual Studio Code
+
+### Recommended XAMPP Components
+
+The following XAMPP services are required:
 
 * Apache
 * MySQL
 
-### 2. Add the Project
+---
 
-Copy the project folder into the XAMPP `htdocs` directory:
+# 6. Installation
+
+## Step 1: Install XAMPP
+
+Download and install XAMPP on your computer.
+
+After installation, open the **XAMPP Control Panel** and start:
+
+```text
+Apache
+MySQL
+```
+
+Both services should show that they are running.
+
+---
+
+## Step 2: Clone the Repository
+
+Open Git Bash or a terminal and navigate to the XAMPP `htdocs` directory.
+
+For example:
+
+```bash
+cd C:/xampp/htdocs
+```
+
+Clone the repository:
+
+```bash
+git clone <YOUR-GITHUB-REPOSITORY-URL>
+```
+
+Alternatively, download the repository as a ZIP file from GitHub and extract it into:
+
+```text
+C:\xampp\htdocs\
+```
+
+The project folder should be located inside `htdocs`.
+
+For example:
 
 ```text
 C:\xampp\htdocs\student_system
 ```
 
-### 3. Create the Database
+---
 
-Open phpMyAdmin:
+# 7. Database Configuration
+
+The system uses **MySQL** as its database management system.
+
+## Step 1: Open phpMyAdmin
+
+Open your browser and go to:
 
 ```text
 http://localhost/phpmyadmin
 ```
 
-Create a database named:
+---
+
+## Step 2: Create the Database
+
+Create a new database named:
 
 ```text
 oers_db
 ```
 
-Import the provided SQL file into the database.
+The database name should match the name used in the PHP database connection.
 
-### 4. Configure the Database
+---
 
-Make sure the database connection settings match your local XAMPP/MySQL configuration.
+## Step 3: Import the Database
 
-Typical settings are:
+If the project contains an SQL database file, for example:
+
+```text
+oers_db.sql
+```
+
+open phpMyAdmin and:
+
+1. Select `oers_db`.
+2. Click **Import**.
+3. Select the SQL file.
+4. Click **Import** or **Go**.
+5. Wait for the tables to be created.
+
+The database contains tables used to store information such as:
+
+* Students
+* Administrators
+* Examinations
+* Examination registrations
+* Logs
+
+---
+
+# 8. Database Connection Configuration
+
+The PHP database connection should contain the correct MySQL credentials.
+
+A typical local XAMPP configuration is:
+
+```php
+<?php
+
+$host = "localhost";
+$username = "root";
+$password = "";
+$database = "oers_db";
+
+$conn = new mysqli($host, $username, $password, $database);
+
+if ($conn->connect_error) {
+    die("Database connection failed: " . $conn->connect_error);
+}
+?>
+```
+
+If the database connection file already exists in the project, update its values if your MySQL configuration is different.
+
+For a standard XAMPP installation:
 
 ```text
 Host: localhost
 Username: root
-Password: 
+Password: empty
 Database: oers_db
 ```
 
-### 5. Run the Project
+---
 
-Open a web browser and visit:
+# 9. Running the System Locally
+
+After starting Apache and MySQL, open a web browser.
+
+If the project folder is called:
+
+```text
+student_system
+```
+
+open:
 
 ```text
 http://localhost/student_system/
 ```
 
-The OERS system should now be available locally.
+The system's homepage/login page should appear.
 
 ---
 
- Security
+# 10. How the System Works
 
-The system includes basic security features such as:
+The system follows a simple workflow involving students and administrators.
 
-* User authentication
-* Session management
-* Input validation
-* Protected admin pages
-* Role-based access
-* Logout functionality
-* Database validation
-
-Additional security measures can be implemented when deploying the system to a production server.
-
----
-
- Responsive Design
-
-The system interface is designed to work on different screen sizes, including:
-
-* Desktop computers
-* Laptops
-* Tablets
-* Mobile phones
-
-The responsive design allows students and administrators to access the system from different devices.
-
----
-
- Future Improvements
-
-Future versions of OERS could include:
-
-* Email notifications
-* SMS notifications
-* Online examination functionality
-* PDF examination registration receipts
-* Advanced reporting and analytics
-* Student profile management
-* Two-factor authentication
-* Improved password recovery
-* Cloud deployment
-* Mobile application
-* Automated examination scheduling
+```text
+                 ONLINE EXAM REGISTRATION SYSTEM
+                              |
+              +---------------+---------------+
+              |                               |
+           STUDENT                        ADMINISTRATOR
+              |                               |
+           Register                         Login
+              |                               |
+            Login                     Admin Dashboard
+              |                               |
+      Student Dashboard             Manage Examinations
+              |                               |
+      View Examinations              View Registrations
+              |                               |
+       Register for Exam             Approve / Reject
+              |                               |
+      Registration Pending                   |
+              |                               |
+      Check Registration Status              |
+              |                               |
+       Registration Approved                 |
+```
 
 ---
 
- Project Information
+# 11. Student Workflow
 
-**Project:** Online Examination Registration System (OERS)
+## Step 1: Student Registration
 
+A new student creates an account by providing the required information through the registration page.
+
+The student's information is stored in the database.
+
+---
+
+## Step 2: Student Login
+
+The student enters their registered credentials on the login page.
+
+The system verifies the credentials against the database.
+
+If the credentials are correct, the student is redirected to the student dashboard.
+
+---
+
+## Step 3: Student Dashboard
+
+The student dashboard provides an overview of the student's examination registration activities.
+
+The dashboard can display information such as:
+
+* Registered examinations
+* Pending registrations
+* Approved registrations
+
+---
+
+## Step 4: View Available Examinations
+
+The student can view examinations available for registration.
+
+The system retrieves examination information from the database.
+
+---
+
+## Step 5: Register for an Examination
+
+The student selects an examination and submits a registration request.
+
+The registration is stored in the `exam_registrations` table.
+
+The initial registration status is:
+
+```text
+Pending
+```
+
+---
+
+## Step 6: Check Registration Status
+
+Students can view their submitted registrations and see whether they are:
+
+```text
+Pending
+Approved
+Rejected
+```
+
+This allows students to monitor the progress of their registration without having to physically visit an office.
+
+---
+
+# 12. Administrator Workflow
+
+## Step 1: Administrator Login
+
+The administrator logs into the system using administrator credentials.
+
+After successful authentication, the administrator is redirected to the administrator dashboard.
+
+---
+
+## Step 2: Administrator Dashboard
+
+The administrator dashboard provides an overview of the system.
+
+It can display statistics such as:
+
+* Total Students
+* Total Examinations
+* Total Registrations
+* Pending Registrations
+* Approved Registrations
+
+---
+
+## Step 3: Manage Examinations
+
+Administrators can manage examination information.
+
+This includes adding and maintaining examination records that students can later view and register for.
+
+---
+
+## Step 4: View Registrations
+
+Administrators can view examination registration requests submitted by students.
+
+The administrator can see information such as:
+
+* Student
+* Examination
+* Registration information
+* Registration status
+
+---
+
+## Step 5: Approve or Reject Registration
+
+The administrator reviews a student's registration request.
+
+The registration status can then be updated from:
+
+```text
+Pending
+```
+
+to:
+
+```text
+Approved
+```
+
+or:
+
+```text
+Rejected
+```
+
+The updated status is stored in the database and can subsequently be viewed by the student.
+
+---
+
+# 13. Database Structure
+
+The system uses a relational MySQL database.
+
+The main tables include:
+
+```text
+admins
+   |
+   |
+   +---- manages ---- examinations
+                         |
+                         |
+students ---- exam_registrations ---- examinations
+    |
+    |
+    +---- registration records
+
+logs
+```
+
+### Main Tables
+
+#### `admins`
+
+Stores administrator account information.
+
+#### `students`
+
+Stores student account and personal information.
+
+#### `examinations`
+
+Stores information about examinations available for registration.
+
+#### `exam_registrations`
+
+Stores examination registration requests submitted by students.
+
+#### `logs`
+
+Stores relevant system activities for monitoring and record keeping.
+
+---
+
+# 14. Project Structure
+
+The project is organized into different PHP files responsible for different parts of the system.
+
+A simplified structure is:
+
+```text
+student_system/
+│
+├── index.php
+├── login.php
+├── register.php
+├── logout.php
+│
+├── student/
+│   ├── dashboard.php
+│   ├── register_exam.php
+│   └── registrations.php
+│
+├── admin/
+│   ├── dashboard.php
+│   ├── examinations.php
+│   └── registrations.php
+│
+├── config/
+│   └── database.php
+│
+├── css/
+│   └── style.css
+│
+└── README.md
+```
+
+> The exact folder structure may differ depending on the final version of the project.
+
+---
+
+# 15. Security Features
+
+The system includes basic security measures such as:
+
+* Login authentication.
+* Separate student and administrator interfaces.
+* Session-based access control.
+* Database validation.
+* Input validation.
+* Logout functionality.
+* Restricted access to administrative functionality.
+
+For a production deployment, additional security features such as stronger password hashing, HTTPS, multi-factor authentication, advanced authorization, and additional input sanitization should be implemented.
+
+---
+
+# 16. Testing
+
+The system was tested during development to ensure that its main functions work correctly.
+
+Testing included:
+
+* Student account registration.
+* Student login.
+* Administrator login.
+* Viewing examinations.
+* Examination registration.
+* Viewing registration records.
+* Approval and rejection of registrations.
+* Dashboard statistics.
+* Logout functionality.
+* Database connectivity.
+* Form validation.
+* Navigation between system pages.
+
+The system was also tested using different user actions to identify and correct PHP, SQL, and database relationship errors.
+
+---
+
+# 17. Common Problems and Solutions
+
+### Apache is not starting
+
+Check whether another application is using port `80` or `443`.
+
+You can also change the Apache port through the XAMPP configuration.
+
+---
+
+### MySQL is not starting
+
+Check whether another MySQL service is already running.
+
+Restart XAMPP or change the MySQL port if necessary.
+
+---
+
+### Database connection failed
+
+Check:
+
+```text
+Database name
+Username
+Password
+MySQL status
+```
+
+For a default XAMPP installation, the configuration is usually:
+
+```text
+Host: localhost
+Username: root
+Password:
+Database: oers_db
+```
+
+---
+
+### Page not found
+
+Make sure the project is located inside:
+
+```text
+C:\xampp\htdocs\
+```
+
+Then verify the URL, for example:
+
+```text
+http://localhost/student_system/
+```
+
+---
+
+### Unknown database error
+
+Make sure the database:
+
+```text
+oers_db
+```
+
+has been created and the SQL file has been imported successfully.
+
+---
+
+# 18. Future Improvements
+
+The system can be enhanced in the future by adding:
+
+* Email notifications.
+* SMS notifications.
+* Password reset through email.
+* Two-factor authentication.
+* Advanced role-based access control.
+* Student examination eligibility verification.
+* Automated examination scheduling.
+* Online payment integration where required.
+* More detailed administrative reports.
+* Exporting reports to PDF or Excel.
+* Improved mobile responsiveness.
+* Cloud deployment.
+* Integration with an existing university student information system.
+* More advanced audit logging.
+
+---
+
+# 19. Development Methodology
+
+The project followed the **Software Development Life Cycle (SDLC)**.
+
+The major stages included:
+
+```text
+Requirements Analysis
+        ↓
+System Design
+        ↓
+Database Design
+        ↓
+Implementation
+        ↓
+Testing
+        ↓
+Deployment
+        ↓
+Maintenance / Future Enhancement
+```
+
+Each stage contributed to the development of the final system.
+
+---
+
+# 20. Conclusion
+
+The Online Exam Registration System provides a practical solution for managing examination registration electronically. It allows students to register for examinations and monitor their registration status while providing administrators with tools for managing examinations and processing registration requests.
+
+The project provided practical experience in requirements analysis, database design, PHP development, MySQL, frontend development, debugging, testing, Git, and GitHub. It also demonstrated how the Software Development Life Cycle can be applied to develop a functional system that addresses a real-world institutional problem.
+
+---
+
+## 21. Author
+
+**Developed by:** Amon Kipkemboi
 **Institution:** Technical University of Kenya
-
-**Project Type:** Academic Project
-
-**Backend:** PHP
-
-**Database:** MySQL
-
-**Development Environment:** XAMPP
+**Course:** Bachelor of Information Technology
+**Project:** Online Exam Registration System (OERS)
 
 ---
+
+## 22. License
+
+This project was developed for educational and academic purposes as part of the Industry-Based Learning module.
+
 
 
 
