@@ -50,7 +50,7 @@ $result = $stmt->get_result();
 <style>
 
 .exams-box {
-    width: 95%;
+    width: 120%;
     max-width: 1100px;
     margin: 40px auto;
     padding: 25px;
@@ -62,9 +62,9 @@ $result = $stmt->get_result();
 }
 
 .exam-table {
-    width: 100%;
+    width: 4%;
     border-collapse: collapse;
-    background: rgba(255, 255, 255, 0.95);
+    background:rgba(0, 123, 255, 0);
     border-radius: 10px;
     overflow: hidden;
 }
@@ -72,14 +72,14 @@ $result = $stmt->get_result();
 .exam-table th {
     background: #1e3a8a;
     color: white;
-    padding: 14px 10px;
-    text-align: left;
+    padding: 6px 10px;
+    text-align:center;
 }
 
 .exam-table td {
-    padding: 13px 10px;
+    padding: 10px 1px;
     border-bottom: 1px solid #ddd;
-    color: #222;
+    color: white;
 }
 
 .exam-table tr:last-child td {
@@ -87,24 +87,24 @@ $result = $stmt->get_result();
 }
 
 .exam-table tr:hover {
-    background: #f3f6ff;
+    background: #2c3f78;
 }
 
 .status {
     display: inline-block;
-    padding: 6px 12px;
+    padding: 6px 10px;
     border-radius: 20px;
     font-size: 13px;
     font-weight: bold;
 }
 
 .status-approved {
-    background: #d1fae5;
-    color: #065f46;
+    background: white;
+    color: #022b13;
 }
 
 .status-pending {
-    background: #fef3c7;
+    background: #f1eae6;
     color: #92400e;
 }
 

@@ -1,73 +1,55 @@
 <?php
-
 session_start();
+include "db.php";
 
-if (!isset($_SESSION['user'])) {
+// Allow only admins
+if (!isset($_SESSION['user']) || $_SESSION['role'] !== "admin") {
     header("Location: login.php");
     exit();
 }
 
-include "db.php";
+// Check if form was submitted
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    die("Invalid request.");
+}
 
-$id=$_POST['id'];
+// Get form data
+$id = (int) $_POST['id'];
+$unit_code = $_POST['unit_code'];
+$unit_name = $_POST['unit_name'];
+$exam_date = $_POST['exam_date'];
+$exam_time = $_POST['exam_time'];
+$venue = $_POST['venue'];
 
-$course_code=$_POST['course_code'];
-$course_name=$_POST['course_name'];
-$exam_date=$_POST['exam_date'];
-$exam_time=$_POST['exam_time'];
-$venue=$_POST['venue'];
-$semester=$_POST['semester'];
-$academic_year=$_POST['academic_year'];
-$status=$_POST['status'];
-
-$stmt=$conn->prepare(
-"UPDATE exams SET
-course_code=?,
-course_name=?,
-exam_date=?,
-exam_time=?,
-venue=?,
-semester=?,
-academic_year=?,
-status=?
-WHERE id=?"
+// Update examination
+$stmt = $conn->prepare(
+    "UPDATE examinations
+     SET unit_code = ?,
+         unit_name = ?,
+         exam_date = ?,
+         exam_time = ?,
+         venue = ?
+     WHERE id = ?"
 );
 
 $stmt->bind_param(
-"ssssssssi",
-$course_code,
-$course_name,
-$exam_date,
-$exam_time,
-$venue,
-$semester,
-$academic_year,
-$status,
-$id
+    "sssssi",
+    $unit_code,
+    $unit_name,
+    $exam_date,
+    $exam_time,
+    $venue,
+    $id
 );
 
-if($stmt->execute()){
+// Execute update
+if ($stmt->execute()) {
 
-$activity="Edited Examination";
+    header("Location: examinations.php?updated=1");
+    exit();
 
-$log=$conn->prepare(
-"INSERT INTO logs(username,activity,log_date,log_time)
-VALUES(?,?,CURDATE(),CURTIME())"
-);
+} else {
 
-$log->bind_param(
-"ss",
-$_SESSION['user'],
-$activity
-);
-
-$log->execute();
-
-header("Location: exams.php");
-
-}else{
-
-echo $stmt->error;
-
+    echo "Error updating examination: " . $conn->error;
 }
 ?>

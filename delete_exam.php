@@ -1,48 +1,33 @@
 <?php
-
 session_start();
 
-if (!isset($_SESSION['user'])) {
+include "db.php";
+
+// Allow only admins
+if (!isset($_SESSION['user']) || $_SESSION['role'] !== "admin") {
     header("Location: login.php");
     exit();
 }
 
-if($_SESSION['role']!="admin"){
-die("Access Denied");
+// Check examination ID
+if (!isset($_GET['id'])) {
+    die("Invalid examination ID.");
 }
 
-include "db.php";
+$id = (int) $_GET['id'];
 
-$id=$_GET['id'];
+// Delete examination
+$stmt = $conn->prepare("DELETE FROM examinations WHERE id = ?");
+$stmt->bind_param("i", $id);
 
-$stmt=$conn->prepare(
-"DELETE FROM exams WHERE id=?"
-);
+// Execute deletion
+if ($stmt->execute()) {
 
-$stmt->bind_param("i",$id);
+    header("Location: examinations.php?deleted=1");
+    exit();
 
-if($stmt->execute()){
+} else {
 
-$activity="Deleted Examination";
-
-$log=$conn->prepare(
-"INSERT INTO logs(username,activity,log_date,log_time)
-VALUES(?,?,CURDATE(),CURTIME())"
-);
-
-$log->bind_param(
-"ss",
-$_SESSION['user'],
-$activity
-);
-
-$log->execute();
-
-header("Location: exams.php");
-
-}else{
-
-echo $stmt->error;
-
+    die("Error deleting examination: " . $conn->error);
 }
 ?>

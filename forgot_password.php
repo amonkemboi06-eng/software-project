@@ -72,12 +72,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     width: 100%;
     max-width: 700px;
     margin: 50px auto;
-    padding: 35px;
+    padding: 40px;
 }
 
 .forgot-box h2 {
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 
 .forgot-box form {
@@ -86,8 +86,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 .forgot-box input {
     width: 100%;
-    box-sizing: border-box;
-    margin-bottom: 25px;
+    box-sizing:base_convert;
+    margin-bottom: 16px;
 }
 
 .forgot-box button {

@@ -83,7 +83,7 @@ required>
 
 <label>Course</label>
 
-<select name="course" required>
+<select name="course" class="form-select" required>
 
 <option value="">Select Course</option>
 
@@ -105,7 +105,7 @@ required>
 
 <label>Year of Study</label>
 
-<select name="year" required>
+<select name="year" class="form-select" required>
 
 <option value="">Select Year</option>
 
@@ -125,7 +125,7 @@ required>
 
 <label>Gender</label>
 
-<select name="gender" required>
+<select name="gender" class="form-select" required>
 
 <option value="">Select Gender</option>
 

@@ -3,20 +3,34 @@ session_start();
 
 include "db.php";
 
+// Success message
+$success = "";
+
+if (isset($_GET['updated'])) {
+    $success = "Examination updated successfully!";
+}
+
+if (isset($_GET['deleted'])) {
+    $success = "Examination deleted successfully!";
+}
+
 // Get examinations
 $query = "SELECT * FROM examinations ORDER BY exam_date ASC";
 $result = $conn->query($query);
 
 // Count examinations
-$totalExams = $conn->query("SELECT COUNT(*) AS total FROM examinations")->fetch_assoc()['total'];
-
+$totalExams = $conn->query(
+    "SELECT COUNT(*) AS total FROM examinations"
+)->fetch_assoc()['total'];
 ?>
 
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
+```
 <meta charset="UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,126 +39,236 @@ $totalExams = $conn->query("SELECT COUNT(*) AS total FROM examinations")->fetch_
 
 <link rel="stylesheet" href="style.css">
 
+<style>
+
+    /* Success Message */
+    #success-message {
+        background: #d4edda;
+        color: #155724;
+        padding: 12px 20px;
+        margin: 15px auto 20px auto;
+        border: 1px solid #c3e6cb;
+        border-radius: 6px;
+        text-align: center;
+        font-weight: bold;
+        width: 90%;
+        max-width: 700px;
+        opacity: 1;
+        transition: opacity 0.5s ease;
+    }
+
+</style>
+```
+
 </head>
 
 <body>
 
+<!-- Background Video -->
+
 <video autoplay muted loop id="bg-video">
-    <source src="VID1.mp4" type="video/mp4">
+
+```
+<source src="VID1.mp4" type="video/mp4">
+```
+
 </video>
+
+<!-- Navigation Menu -->
 
 <?php include "menu.php"; ?>
 
 <div class="container">
 
+```
 <div class="login-box" style="width:95%; max-width:1300px;">
 
-<h1 style="text-align:center;">
-Available Examinations
-</h1>
 
-<p class="welcome">
-Total Examinations: <strong><?php echo $totalExams; ?></strong>
-</p>
+    <!-- Success Message -->
 
-<?php if(isset($_SESSION['role']) && $_SESSION['role']=="admin"){ ?>
+    <?php if ($success != "") { ?>
 
-<p style="text-align:center; margin-bottom:20px;">
+        <div id="success-message">
 
-<a class="btn-success" href="add_exam.php">
+            <?php echo htmlspecialchars($success); ?>
 
-Add Examination
+        </div>
 
-</a>
+    <?php } ?>
 
-</p>
 
-<?php } ?>
-<div class="table-responsive">
-<table>
+    <h1 style="text-align:center;">
 
-<tr>
+        Available Examinations
 
-<th>No.</th>
+    </h1>
 
-<th>Unit Code</th>
 
-<th>Unit Name</th>
+    <p class="welcome">
 
-<th>Date</th>
+        Total Examinations:
 
-<th>Time</th>
+        <strong>
 
-<th>Venue</th>
+            <?php echo $totalExams; ?>
 
-<?php if(isset($_SESSION['role']) && $_SESSION['role']=="admin"){ ?>
+        </strong>
 
-<th>Edit</th>
+    </p>
 
-<th>Delete</th>
 
-<?php } ?>
+    <!-- Add Examination -->
 
-</tr>
+    <?php if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") { ?>
 
-<?php
+        <p style="text-align:center; margin-bottom:20px;">
 
-$number = 1;
+            <a class="btn-success" href="add_exam.php">
 
-while($exam = $result->fetch_assoc()){
+                Add Examination
 
-?>
+            </a>
 
-<tr>
+        </p>
 
-<td><?php echo $number++; ?></td>
+    <?php } ?>
 
-<td><?php echo htmlspecialchars($exam['unit_code']); ?></td>
 
-<td><?php echo htmlspecialchars($exam['unit_name']); ?></td>
+    <!-- Examination Table -->
 
-<td><?php echo htmlspecialchars($exam['exam_date']); ?></td>
+    <div class="table-responsive">
 
-<td><?php echo htmlspecialchars($exam['exam_time']); ?></td>
+        <table>
 
-<td><?php echo htmlspecialchars($exam['venue']); ?></td>
+            <tr>
 
-<?php if(isset($_SESSION['role']) && $_SESSION['role']=="admin"){ ?>
+                <th>No.</th>
 
-<td>
+                <th>Unit Code</th>
 
-<a class="btn-edit"
-href="edit_exam.php?id=<?php echo $exam['id']; ?>">
+                <th>Unit Name</th>
 
-Edit
+                <th>Date</th>
 
-</a>
+                <th>Time</th>
 
-</td>
+                <th>Venue</th>
 
-<td>
 
-<a class="btn-delete"
-href="delete_exam.php?id=<?php echo $exam['id']; ?>"
-onclick="return confirm('Delete this examination?');">
+                <?php if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") { ?>
 
-Delete
+                    <th>Edit</th>
 
-</a>
+                    <th>Delete</th>
 
-</td>
+                <?php } ?>
 
-<?php } ?>
+            </tr>
 
-</tr>
 
-<?php } ?>
+            <?php
 
-</table>
+            $number = 1;
+
+            while ($exam = $result->fetch_assoc()) {
+
+            ?>
+
+                <tr>
+
+                    <td>
+                        <?php echo $number++; ?>
+                    </td>
+
+                    <td>
+                        <?php echo htmlspecialchars($exam['unit_code']); ?>
+                    </td>
+
+                    <td>
+                        <?php echo htmlspecialchars($exam['unit_name']); ?>
+                    </td>
+
+                    <td>
+                        <?php echo htmlspecialchars($exam['exam_date']); ?>
+                    </td>
+
+                    <td>
+                        <?php echo htmlspecialchars($exam['exam_time']); ?>
+                    </td>
+
+                    <td>
+                        <?php echo htmlspecialchars($exam['venue']); ?>
+                    </td>
+
+
+                    <?php if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") { ?>
+
+                        <!-- Edit -->
+
+                        <td>
+
+                            <a class="btn-edit"
+                               href="edit_exams.php?id=<?php echo $exam['id']; ?>">
+
+                                Edit
+
+                            </a>
+
+                        </td>
+
+
+                        <!-- Delete -->
+
+                        <td>
+
+                            <a class="btn-delete"
+                               href="delete_exam.php?id=<?php echo $exam['id']; ?>"
+                               onclick="return confirm('Delete this examination?');">
+
+                                Delete
+
+                            </a>
+
+                        </td>
+
+                    <?php } ?>
+
+                </tr>
+
+            <?php } ?>
+
+        </table>
+
+    </div>
+
 </div>
-</div>
+```
 
 </div>
+
+<!-- Automatically hide success message -->
+
+<script>
+
+    setTimeout(function () {
+
+        const message = document.getElementById("success-message");
+
+        if (message) {
+
+            message.style.opacity = "0";
+
+            setTimeout(function () {
+
+                message.remove();
+
+            }, 500);
+
+        }
+
+    }, 3000);
+
+</script>
 
 </body>
 
